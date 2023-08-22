@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smash Haven</title>
+    <link
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="product.css" />
+  </head>
+  <body>
+    <header class="text-gray-400 bg-gray-900 body-font">
+      <div
+        class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center"
+      >
+        <a
+          class="flex title-font font-medium items-center text-white mb-4 md:mb-0"
+          href="index.html"
+        >
+          <img
+            src="https://img.freepik.com/premium-vector/badminton-logo-design-sports-logo_331749-131.jpg?w=2000"
+            style="height: 35px; border-radius: 50px"
+          />
+          <path
+            d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+          ></path>
+
+          <span class="ml-3 text-xl">Smash Haven</span>
+        </a>
+        <nav
+          class="md:ml-auto flex flex-wrap items-center text-base justify-center"
+        >
+          <a class="mr-5 hover:text-white" href="index.html">Home</a>
+          <a class="mr-5 hover:text-white" href="raquets.html">Raquets</a>
+          <a class="mr-5 hover:text-white" href="shoes.html">Shoes</a>
+          <a class="mr-5 hover:text-white" href="athlete.html">Athelete</a>
+          <a class="mr-5 hover:text-white" href="cocks.html">Shuttlecocks</a>
+          <a class="mr-5 hover:text-white" href="astroxs.html">Astrox Series</a>
+          <a class="mr-5 hover:text-white" href="nanoflares.html"
+            >Nanoflare Limited Edition</a
+          >
+        </nav>
+        <button
+          class="inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0"
+          id="button1"
+        >
+          <a href="contactus.html">Contact Us</a>
+          <svg
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            class="w-4 h-4 ml-1"
+            viewBox="0 0 24 24"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7"></path>
+          </svg>
+        </button>
+
+        &nbsp;&nbsp;&nbsp;&nbsp;
+
+          <button
+            class="inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0"
+            id="button1"
+          >
+            <a href="cart.html">Cart</a>
+            <svg
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              class="w-4 h-4 ml-1"
+              viewBox="0 0 24 24"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+          </button>
+      </div>
+    </header>
+
+    <hr />
+
+    <main>
+      <div class="product-container">
+        <div class="product-image">
+          <img
+            src="https://m.media-amazon.com/images/I/71RK3bvc1-L._SX679_.jpg"
+            alt="Product Image"
+          />
+        </div>
+        <div class="product-details">
+          <h1 class="product-title" style="color: white;">YONEX Voltric Z Force II</h1>
+          <p class="product-description" style="color: white;">
+            The Yonex Voltric Z Force II is a high-performance badminton racket renowned for its power and speed. Created by Yonex, a leading sports equipment manufacturer, the Voltric Z Force II boasts a unique Tri-Voltage System that balances power, control, and speed. With a stiff flex and head-heavy balance, it's favored by aggressive players aiming for dominant smashes and fast responses.
+          </p>
+          <p class="product-price" style="color: white;">
+            Rs:- 17,037</p>
+          <div class="quantity-controls">
+            <button class="decrement">-</button>
+            <span class="quantity">1</span>
+            <button class="increment">+</button>
+          </div>
+          <button class="add-to-cart" onclick="adc()">Add to Cart</button>
+
+
+          <p id="demo"></p>
+
+          
+        </div>
+      </div>
+      <script>
+        // Product Page
+        const addToCartButtons = document.querySelectorAll(".add-to-cart");
+
+        addToCartButtons.forEach((addToCartButton) => {
+          const incrementButton =
+            addToCartButton.parentElement.querySelector(".increment");
+          const decrementButton =
+            addToCartButton.parentElement.querySelector(".decrement");
+          const quantitySpan =
+            addToCartButton.parentElement.querySelector(".quantity");
+
+          incrementButton.addEventListener("click", () => {
+            const currentQuantity = parseInt(quantitySpan.textContent);
+            quantitySpan.textContent = currentQuantity + 1;
+          });
+
+          decrementButton.addEventListener("click", () => {
+            const currentQuantity = parseInt(quantitySpan.textContent);
+            if (currentQuantity > 1) {
+              quantitySpan.textContent = currentQuantity -1;
+            }
+          });
+
+          addToCartButton.addEventListener("click", () => {
+            const productName = "YONEX Voltric Z Force II";
+            const productPrice = 17037;
+            const quantity = parseInt(quantitySpan.textContent);
+
+            if (quantity > 0) {
+              const cartItem = {
+                name: productName,
+                price: productPrice,
+                quantity: quantity,
+              };
+              addToCart(cartItem);
+
+              // Reset quantity to 0
+              quantitySpan.textContent = "1";
+            }
+          });
+        });
+
+        function addToCart(item) {
+          const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+          cartItems.push(item);
+          localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        }
+
+        function adc(){
+            document.getElementById("demo").innerHTML="Your product Is added to the cart.";
+        }
+
+        //coded by krishna dhiman.
+      </script>
+    </main>
+
+    <hr />
+
+    <footer class="text-gray-400 bg-gray-900 body-font">
+      <div
+        class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col"
+      >
+        <a
+          class="flex title-font font-medium items-center md:justify-start justify-center text-white"
+          href="index.html"
+        >
+          <img
+            src="https://img.freepik.com/premium-vector/badminton-logo-design-sports-logo_331749-131.jpg?w=2000"
+            style="height: 35px; border-radius: 50px"
+          />
+          <path
+            d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+          ></path>
+
+          <span class="ml-3 text-xl">Smash Haven</span>
+        </a>
+        <p
+          class="text-sm text-gray-400 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-800 sm:py-2 sm:mt-0 mt-4"
+        >
+          © 2023 Smash Haven —
+          <a
+            class="text-gray-500 ml-1"
+            target="_blank"
+            rel="noopener noreferrer"
+            >@Krishna Dhiman and Team</a
+          >
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

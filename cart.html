@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smash Haven</title>
+<link
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+<style>
+    /* Add your custom styles for the Cart Page here */
+body {
+  font-family: Arial, sans-serif;
+  background-color: rgb(26,32,44);
+  color: white;
+}
+
+.cart {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgb(26,32,44);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+}
+
+#cart-total {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #007bff;
+}
+
+#clear-cart ,#place-order{
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#place-order{
+  align-items: center;
+  justify-content: center;
+}
+
+#clear-cart:hover ,#place-order:hover{
+  background-color: #0056b3;
+}
+
+</style>
+</head>
+<body>
+    <header class="text-gray-400 bg-gray-900 body-font">
+        <div
+          class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center"
+        >
+          <a
+            class="flex title-font font-medium items-center text-white mb-4 md:mb-0"
+            href="index.html"
+          >
+            <img
+              src="https://img.freepik.com/premium-vector/badminton-logo-design-sports-logo_331749-131.jpg?w=2000"
+              style="height: 35px; border-radius: 50px"
+            />
+            <path
+              d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+            ></path>
+  
+            <span class="ml-3 text-xl">Smash Haven</span>
+          </a>
+          <nav
+            class="md:ml-auto flex flex-wrap items-center text-base justify-center"
+          >
+            <a class="mr-5 hover:text-white" href="index.html">Home</a>
+            <a class="mr-5 hover:text-white" href="raquets.html">Raquets</a>
+            <a class="mr-5 hover:text-white" href="shoes.html">Shoes</a>
+            <a class="mr-5 hover:text-white" href="athlete.html">Athelete</a>
+            <a class="mr-5 hover:text-white" href="cocks.html">Shuttlecocks</a>
+            <a class="mr-5 hover:text-white" href="astroxs.html">Astrox Series</a>
+            <a class="mr-5 hover:text-white" href="nanoflares.html"
+              >Nanoflare Limited Edition</a
+            >
+          </nav>
+          <button
+            class="inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0"
+            id="button1"
+          >
+            <a href="contactus.html">Contact Us</a>
+            <svg
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              class="w-4 h-4 ml-1"
+              viewBox="0 0 24 24"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+          </button>
+  
+          &nbsp;&nbsp;&nbsp;&nbsp;
+  
+            <button
+              class="inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0"
+              id="button1"
+            >
+              <a href="cart.html">Cart</a>
+              <svg
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                class="w-4 h-4 ml-1"
+                viewBox="0 0 24 24"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7"></path>
+              </svg>
+            </button>
+        </div>
+      </header>
+
+      <hr>
+
+    <main>
+  <div class="cart">
+    <h2>Your Cart</h2>
+    <ul id="cart-items">
+    </ul>
+    <p>Grand Total: Rs:- <span id="cart-total">0.00</span></p>
+    <button id="clear-cart">Clear Cart</button>
+    <button id="place-order" onclick="placeorder()">Place order</button>
+  </div>
+  <script>
+    // Cart Page
+        const cartItemsList = document.getElementById("cart-items");
+        const cartTotal = document.getElementById("cart-total");
+        const clearCartButton = document.getElementById("clear-cart");
+
+        const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+        let total = 0;
+
+        cartItems.forEach((item) => {
+          const cartItem = document.createElement("li");
+          cartItem.textContent = `${item.name} - Quantity: ${
+            item.quantity
+          } - Total - Rs:- ${(item.price * item.quantity).toFixed(2)}`;
+          cartItemsList.appendChild(cartItem);
+          total += item.price * item.quantity;
+        });
+
+        cartTotal.textContent = total.toFixed(2);
+
+        clearCartButton.addEventListener("click", () => {
+          localStorage.removeItem("cartItems");
+          cartItemsList.innerHTML = "";
+          cartTotal.textContent = "0.00";
+        });
+
+        function placeorder(){
+          alert("Order Placed.")
+          {
+          localStorage.removeItem("cartItems");
+          cartItemsList.innerHTML = "";
+          cartTotal.textContent = "0.00";
+        };
+        }
+
+        //coded by krishna dhiman.
+  </script>
+  </main>
+<hr>
+
+<footer class="text-gray-400 bg-gray-900 body-font">
+    <div
+      class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col"
+    >
+      <a
+        class="flex title-font font-medium items-center md:justify-start justify-center text-white"
+        href="index.html"
+      >
+        <img
+          src="https://img.freepik.com/premium-vector/badminton-logo-design-sports-logo_331749-131.jpg?w=2000"
+          style="height: 35px; border-radius: 50px"
+        />
+        <path
+          d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+        ></path>
+
+        <span class="ml-3 text-xl">Smash Haven</span>
+      </a>
+      <p
+        class="text-sm text-gray-400 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-800 sm:py-2 sm:mt-0 mt-4"
+      >
+        © 2023 Smash Haven —
+        <a
+          class="text-gray-500 ml-1"
+          target="_blank"
+          rel="noopener noreferrer"
+          >@Krishna Dhiman and Team</a
+        >
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
